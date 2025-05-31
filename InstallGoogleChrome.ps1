@@ -1,4 +1,4 @@
-# this script allows to download and install automatically google chrome
+# this script allows to automatically download and install google chrome
 
 
 # Create a temporary directory to store Google Chrome.
