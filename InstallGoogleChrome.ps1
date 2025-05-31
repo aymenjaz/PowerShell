@@ -1,6 +1,5 @@
 # this script allows to automatically download and install google chrome
 
-
 # Create a temporary directory to store Google Chrome.
 mkdir -Path $env:temp\chromeinstall -erroraction SilentlyContinue | Out-Null
 $Download = join-path $env:temp\chromeinstall chrome_installer.exe
