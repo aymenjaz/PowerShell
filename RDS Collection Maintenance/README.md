@@ -76,7 +76,8 @@ The script uses a Write-Log function to capture all output, errors, and status u
 - PowerShell 5.1 or later
 - Admin privileges on all RDS hosts
 - Remote PowerShell enabled between hosts : This PowerShell Script must be executed on each RDS server
-Remember : Replace Broker Server Name with your Broker Name.
+
+> Remember : Replace Broker Server Name with your Broker Name.
 
 ```PowerShell
 # the WinRM and PSRemoting commands use ports 5985 for HTTP and 5986 for HTTPS
