@@ -1,7 +1,7 @@
 # 🧰 TechTool – The Ultimate PowerShell Toolkit for Technicians
 
 **Created by [Aymen EL JAZIRI](https://www.linkedin.com/in/aymeneljaziri/)**  
-📅 First release: February 2024  
+📅 First release: February 2023  
 💻 Platform: Windows Server & Workstations
 
 ---
