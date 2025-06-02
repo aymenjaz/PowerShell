@@ -1,3 +1,5 @@
+Set-ExecutionPolicy RemoteSigned -Force
+
 # Import Script Write-LogFile
 . .\Write-LogFile.ps1
 
