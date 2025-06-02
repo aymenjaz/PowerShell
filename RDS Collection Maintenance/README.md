@@ -36,10 +36,10 @@ The `Main.ps1` script performs the following actions in sequence:
    - Re-enables user logins once maintenance is completed.
 
 ---
-## Diagram :
+## 📊 Diagram
 
 ![RDS Collection maintainer (3)](https://github.com/user-attachments/assets/3a824448-26f2-4396-af83-548d988d526c)
-
+<img src="https://github.com/user-attachments/assets/3a824448-26f2-4396-af83-548d988d526c" style="width: 200px;">
 ---
 
 ## 🧱 Script Structure
