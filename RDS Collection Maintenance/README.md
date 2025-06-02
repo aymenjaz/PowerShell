@@ -75,7 +75,30 @@ The script uses a Write-Log function to capture all output, errors, and status u
 - Windows Server with RDS Role configured
 - PowerShell 5.1 or later
 - Admin privileges on all RDS hosts
-- Remote PowerShell enabled between hosts
+- Remote PowerShell enabled between hosts : This PowerShell Script must be executed on each RDS server
+Remember : Replace Broker Server Name with your Broker Name.
+
+```PowerShell
+# the WinRM and PSRemoting commands use ports 5985 for HTTP and 5986 for HTTPS
+# so make sure these ports are not blocked by the network firewall
+
+# Set Broker Server Name
+$Broker = "BROKER.domain.LOCAL"
+
+# 1- Enable WinRm
+winrm quickconfig
+
+# 2- Enable Powershell Remote
+Enable-PSRemoting -Force
+
+# Set the Broker in List Of Trusted Hosts
+$curList = (Get-Item WSMan:\localhost\Client\TrustedHosts).value
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "$curList , $($Broker)"
+
+
+# Get List Of Trusted Hosts for one Server
+Get-Item WSMan:\localhost\Client\TrustedHosts
+```
 
 ---
 
