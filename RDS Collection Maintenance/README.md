@@ -53,6 +53,7 @@ This solution is built using modular `.ps1` files for clarity and reusability:
 ├── Close-RDSSessions.ps1
 ├── Reset-RDSServers.ps1
 └── Write-Log.ps1
+```
 
 ---
 
