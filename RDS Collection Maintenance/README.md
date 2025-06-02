@@ -37,9 +37,7 @@ The `Main.ps1` script performs the following actions in sequence:
 
 ---
 ## 📊 Diagram
-
-![RDS Collection maintainer (3)](https://github.com/user-attachments/assets/3a824448-26f2-4396-af83-548d988d526c)
-<img src="https://github.com/user-attachments/assets/3a824448-26f2-4396-af83-548d988d526c" style="width: 400px;">
+<img src="https://github.com/user-attachments/assets/3a824448-26f2-4396-af83-548d988d526c" style="width: 500px;">
 ---
 
 ## 🧱 Script Structure
