@@ -3,7 +3,9 @@
 This PowerShell project automates the maintenance of a Remote Desktop Services (RDS) Collection, including both the **RD Connection Broker** and all associated **RDS session hosts**. The script is designed to be executed during scheduled maintenance windows and includes full logging to help with troubleshooting and auditing.
 
 > ✅ Modular, automated, and user-aware
+> 
 > This script reduces manual work while ensuring a safe and clean reboot cycle.
+> 
 
 ---
 
