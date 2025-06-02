@@ -52,3 +52,17 @@ Install useful IT tools silently with a single click:
    ```bash
    git clone https://github.com/yourusername/TechTool.git
    ```
+
+## 🛠 Requirements
+- Windows PowerShell 5.1 or later
+- Internet connection (for some software installers & IP location lookup)
+- Administrator privileges
+
+## 🔒 Disclaimer
+- This script is provided as-is for educational and productivity purposes. Use it responsibly in production environments.
+
+## 📄 License
+- License Free
+
+
+  
