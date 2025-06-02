@@ -15,7 +15,7 @@ Function Clear-ResourceEnvironment
 
 $menu = @"
 *******************************************************************************
-SysAdminTool v1.1 Created By Aymen EL JAZIRI .... Feb 2024
+TechTool v1.1 Created By Aymen EL JAZIRI .... Feb 2024
 *******************************************************************************
 
 **************************** System Tools ******************************
@@ -44,7 +44,7 @@ x) to end the program
 
 "@
 
-$host.ui.RawUI.WindowTitle = "SysAdminTool v1.0 By Aymen EL JAZIRI"
+$host.ui.RawUI.WindowTitle = "TechTool v1.0 By Aymen EL JAZIRI"
 
 #==========================================================================================================================================
 Function Get-RebootHistory 
