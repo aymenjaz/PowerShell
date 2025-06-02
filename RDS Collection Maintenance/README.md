@@ -37,8 +37,9 @@ The `Main.ps1` script performs the following actions in sequence:
 
 ---
 ## 📊 Diagram
+<p align="center">
 <img src="https://github.com/user-attachments/assets/3a824448-26f2-4396-af83-548d988d526c" style="display: block; margin: 0 auto; width: 500px;">
-
+</p>
 
 ---
 
