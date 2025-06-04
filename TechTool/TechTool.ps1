@@ -15,7 +15,7 @@ Function Clear-ResourceEnvironment
 
 $menu = @"
 *******************************************************************************
-TechTool v1.1 Created By Aymen EL JAZIRI .... Feb 2024
+TechTool v1.0 Created By Aymen EL JAZIRI .... Feb 2024
 *******************************************************************************
 
 **************************** System Tools ******************************
