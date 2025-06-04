@@ -39,7 +39,7 @@ TechTool v1.0 Created By Aymen EL JAZIRI .... Feb 2024
 23) Auto download and Install TreeSize
 
 *******************************************************************************
-x) to exit the program
+x) to exit program
 *******************************************************************************
 
 "@
@@ -378,6 +378,7 @@ do
         'x'{
             Write-Host `n`n '           Good Bye ;-) ' -BackgroundColor Green
             Start-Sleep 3
+            exit
         }
 
         default
