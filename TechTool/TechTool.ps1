@@ -39,7 +39,7 @@ TechTool v1.0 Created By Aymen EL JAZIRI .... Feb 2024
 23) Auto download and Install TreeSize
 
 *******************************************************************************
-x) to end the program
+x) to exit the program
 *******************************************************************************
 
 "@
