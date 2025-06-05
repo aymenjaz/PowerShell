@@ -41,20 +41,8 @@ cleanmgr /sagerun:1 | Out-Null
 
 ---
 
-### 🔔 4. Notification Beeps + Sleep
 
-```powershell
-$([char]7)
-Start-Sleep -Seconds 1
-$([char]7)
-Start-Sleep -Seconds 1
-
-Write-Host "Clean Up Task completed!"
-```
-
----
-
-### 🔁 5. Reboot the Computer
+### 🔁 4. Reboot the Computer
 
 ```powershell
 Restart-Computer
