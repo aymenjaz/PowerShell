@@ -5,7 +5,7 @@ Import-Module ActiveDirectory
 # Get the Documents folder path
 $DocumentsPath = Join-Path -Path $env:USERPROFILE -ChildPath "Documents"
 
-# Create the full output path
+# Create the full output path : Documents\Group_Membership.txt
 $OutFilePath = $DocumentsPath + "\Group_Membership.txt"
 
 # Initiate output file
