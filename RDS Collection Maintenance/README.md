@@ -79,11 +79,11 @@ The script uses a Write-Log function to capture all output, errors, and status u
 ---
 
 ## 💡 Why Use This Script?
-✅ Consistency: Automates a multi-step RDS maintenance workflow
-✅ User communication: Sends real-time disconnect warnings
-✅ Hygiene: Clears profiles and virtual disks regularly
-✅ Safety: Prevents new sessions before and during reboots
-✅ Scalable: Works across any number of RDS servers
+- ✅ Consistency: Automates a multi-step RDS maintenance workflow
+- ✅ User communication: Sends real-time disconnect warnings
+- ✅ Hygiene: Clears profiles and virtual disks regularly
+- ✅ Safety: Prevents new sessions before and during reboots
+- ✅ Scalable: Works across any number of RDS servers
 
 ---
 
