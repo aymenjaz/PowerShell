@@ -40,7 +40,7 @@ Remove-Item $certificatePath
 
 ```powershell
 # For netsh binding
-Import-PfxCertificate -FilePath $pfxFilePath Cert:\LocalMachine\My -Password $pfxPassword -Exportable
+Import-PfxCertificate -FilePath $pfxFilePath Cert:\LocalMachine\My -Password $pfxPassword -Exportable:$false
 
 # For local trust
 Import-Certificate -FilePath $cerFilePath -CertStoreLocation Cert:\CurrentUser\Root
