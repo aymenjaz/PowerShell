@@ -88,10 +88,10 @@ The script uses a Write-Log function to capture all output, errors, and status u
 ---
 
 ## 📌 Requirements
-- Windows Server with RDS Role configured
-- PowerShell 5.1 or later
-- Admin privileges on all RDS hosts
-- Remote PowerShell enabled between hosts : This PowerShell Script must be executed on each RDS server
+- Windows Server with RDS Role configured.
+- PowerShell 5.1 or later.
+- Admin privileges on all RDS hosts.
+- Remote PowerShell enabled between hosts : This PowerShell Script must be executed on each RDS server to enable WinRM commands and PowerShell Remote and adding Broker to trusted host list (this will prevent entring credantials every time and 100% silent and automated script).
 
 > Remember : Replace Broker Server Name with your Broker Name.
 
