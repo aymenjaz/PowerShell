@@ -1,4 +1,3 @@
-
 # Import required modules
 Import-Module Microsoft.Graph.Authentication
 Import-Module Microsoft.Graph.Identity.SignIns
