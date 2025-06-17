@@ -59,34 +59,49 @@ if ($WebhookData -ne $null) {
     exit
 }
 
-# App Registration credentials
-$TenantId     = "<YOUR-TENANT-ID>"
-$ClientId     = "<YOUR-CLIENT-ID>"
-$ClientSecret = "<YOUR-CLIENT-SECRET>"
+
+# ----------------------------
+# Define your app credentials
+# ----------------------------
+$TenantId     = "xxxxxx-xxxxxxx-xxxxxxx-xxxxxxx-xxxxxxx"  # entra tenant ID
+$ClientId     = "xxxxxx-xxxxxxx-xxxxxxx-xxxxxxx-xxxxxxx"  # entra application ID
+$ClientSecret = "xxxxxx-xxxxxxx-xxxxxxx-xxxxxxx-xxxxxxx"  # entra application secret
 
 $Scope        = "https://graph.microsoft.com/.default"
 $AuthUrl      = "https://login.microsoftonline.com/$TenantId/oauth2/v2.0/token"
 
-# Get access token
+# ========== Build Body ==========
 $Body = @{
     client_id     = $ClientId
     scope         = $Scope
     client_secret = $ClientSecret
     grant_type    = "client_credentials"
 }
+
+# ========== Request Access Token ==========
 $TokenResponse = Invoke-RestMethod -Method POST -Uri $AuthUrl -Body $Body -ContentType "application/x-www-form-urlencoded"
 $AccessToken   = $TokenResponse.access_token
-$Headers = @{ Authorization = "Bearer $AccessToken" }
 
-# Get user ID
+# ========== Use Access Token in API Call ==========
+$Headers = @{
+    Authorization = "Bearer $AccessToken"
+}
+
+# ===============================
+# GET USER OBJECT ID
+# ===============================
 $UserResponse = Invoke-RestMethod -Method GET -Uri "https://graph.microsoft.com/v1.0/users/$UserToExclude" -Headers $Headers
 $UserId = $UserResponse.id
 
-# Get all CA policies
+# ===============================
+# GET ALL CONDITIONAL ACCESS POLICIES
+# ===============================
 $PoliciesResponse = Invoke-RestMethod -Method GET -Uri "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies" -Headers $Headers
 $Policies = $PoliciesResponse.value
 
-# Loop through and update policies
+# ===============================
+# EXCLUDE USER FROM ALL CONDITIONAL ACCESS POLICIES
+# ===============================
 foreach ($Policy in $Policies) {
     Write-Output "Processing policy: $($Policy.displayName)"
 
@@ -104,8 +119,10 @@ foreach ($Policy in $Policies) {
         continue
     }
 
+    # Add the user to the exclusion list
     $NewExcludeList = $ExcludeUsers + $UserId
 
+    # Reconstruct the conditions object
     $NewConditions = @{
         users = @{
             includeUsers = $IncludeUsers
@@ -113,20 +130,25 @@ foreach ($Policy in $Policies) {
         }
     }
 
+    # Update the policy
     $UpdateUri = "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies/$($Policy.id)"
-    $Body = @{ conditions = $NewConditions } | ConvertTo-Json -Depth 10
+    $Body = @{
+        conditions = $NewConditions
+    } | ConvertTo-Json -Depth 10
 
     Invoke-RestMethod -Method PATCH -Uri $UpdateUri `
-        -Headers @{
-            Authorization = "Bearer $AccessToken"
-            "Content-Type" = "application/json"
-        } `
-        -Body $Body
+    -Headers @{
+        Authorization = "Bearer $AccessToken"
+        "Content-Type" = "application/json"
+    } `
+    -Body $Body
 
     Write-Output "User excluded from policy: $($Policy.displayName)"
 }
 
-# Cleanup
+# ===============================
+# REMOVE TOKEN
+# ===============================
 Remove-Variable AccessToken, ClientSecret, TokenResponse, Headers, PatchHeaders -ErrorAction SilentlyContinue
 ````
 
