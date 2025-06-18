@@ -32,6 +32,7 @@ Sometimes, a Conditional Access policy might unintentionally block administrator
 - App Registration with:
   - Microsoft Graph permissions:
     - `Policy.ReadWrite.ConditionalAccess`
+    - `Policy.Read.All`
     - `User.Read.All`
   - Client Secret
 - The App Registration must be granted **admin consent**
