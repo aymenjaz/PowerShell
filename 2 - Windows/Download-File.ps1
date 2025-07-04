@@ -7,7 +7,7 @@ This function support auto retry when downloading fail.
 it takes as parameters : 
 URL : direct download file URL
 Destination : destination folder where you ca save dowloaded file
-RetryCount : maximum retry count by default 3.
+RetryCount : maximum retry count by default 3, you can define any number you want.
 
 example :
 $URL = "https://drive.google.com/file2.zip"
