@@ -3,7 +3,7 @@
 
 This function is used to download file using PowerShell
 I'm using this function to automatically download then install application from iternet using RMM Solution like NinjaOne , Datto RMM, N-Able...etc
-This finction support auto retry when downloading files.
+This function support auto retry when downloading fail.
 it takes as parameters : 
 URL : direct download file URL
 Destination : destination folder where you ca save dowloaded file
