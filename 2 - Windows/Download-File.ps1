@@ -2,7 +2,7 @@
 <# 
 
 This function is used to download file using PowerShell
-I'm using this function to automatically download then install application from iternet using RMM Solution like NinjaOne , Datto RMM, N-Able...etc
+I'm using this function to automatically download then install application from iternet using Intune & RMM Solution like NinjaOne , Datto RMM, N-Able...etc
 This function support auto retry when download fails.
 it takes as parameters : 
 URL : direct download file URL
