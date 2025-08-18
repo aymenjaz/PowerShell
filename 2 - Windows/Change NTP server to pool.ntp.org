@@ -1,19 +1,34 @@
-:: ----------------------------------------------------------
-:: ---------Change NTP (time) server to pool.ntp.org---------
-:: ----------------------------------------------------------
-echo --- Change NTP (time) server to pool.ntp.org
-:: Configure time source
-w32tm /config /syncfromflags:manual /manualpeerlist:"0.ca.pool.ntp.org 1.ca.pool.ntp.org 2.ca.pool.ntp.org 3.ca.pool.ntp.org"
-:: Stop time service if running
-SC queryex "w32time"|Find "STATE"|Find /v "RUNNING">Nul||(
-    net stop w32time
-)
-:: Start time service and sync now
-net start w32time
+# ----------------------------------------------------------
+# ---------Change NTP (time) server to pool.ntp.org---------
+# ----------------------------------------------------------
+
+Write-Host "--- Change NTP (time) server to pool.ntp.org" -ForegroundColor Cyan
+
+$NTPServers = "0.ca.pool.ntp.org 1.ca.pool.ntp.org 2.ca.pool.ntp.org 3.ca.pool.ntp.org"
+
+# Configure time source
+w32tm /config /syncfromflags:manual /manualpeerlist:$NTPServers
+
+# Vérifier si le service w32time est en cours d'exécution
+$service = Get-Service -Name w32time -ErrorAction SilentlyContinue
+
+if ($null -ne $service) 
+{
+    if ($service.Status -eq 'Running') 
+    {
+        Write-Host "Stopping Windows Time service..." -ForegroundColor Yellow
+        Stop-Service -Name w32time -Force
+    }
+    Write-Host "Starting Windows Time service..." -ForegroundColor Green
+    Start-Service -Name w32time
+} else 
+{
+    Write-Host "Service w32time introuvable !" -ForegroundColor Red
+}
+
+# Appliquer la configuration et forcer la resynchronisation
 w32tm /config /update
 w32tm /resync
-:: ----------------------------------------------------------
 
-
-pause
-exit /b 0
+# ----------------------------------------------------------
+Write-Host "NTP server updated and time resynchronized." -ForegroundColor Green
