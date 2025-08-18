@@ -2,7 +2,7 @@
 # ---------Change NTP (time) server to pool.ntp.org---------
 # ----------------------------------------------------------
 
-Write-Host "--- Change NTP (time) server to pool.ntp.org" -ForegroundColor Cyan
+Write-Host "Change NTP (time) server to pool.ntp.org" -ForegroundColor Cyan
 
 $NTPServers = "0.ca.pool.ntp.org 1.ca.pool.ntp.org 2.ca.pool.ntp.org 3.ca.pool.ntp.org"
 
@@ -30,5 +30,4 @@ if ($null -ne $service)
 w32tm /config /update
 w32tm /resync
 
-# ----------------------------------------------------------
 Write-Host "NTP server updated and time resynchronized." -ForegroundColor Green
