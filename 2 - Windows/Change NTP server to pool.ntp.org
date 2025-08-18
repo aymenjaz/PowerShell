@@ -1,0 +1,19 @@
+:: ----------------------------------------------------------
+:: ---------Change NTP (time) server to pool.ntp.org---------
+:: ----------------------------------------------------------
+echo --- Change NTP (time) server to pool.ntp.org
+:: Configure time source
+w32tm /config /syncfromflags:manual /manualpeerlist:"0.ca.pool.ntp.org 1.ca.pool.ntp.org 2.ca.pool.ntp.org 3.ca.pool.ntp.org"
+:: Stop time service if running
+SC queryex "w32time"|Find "STATE"|Find /v "RUNNING">Nul||(
+    net stop w32time
+)
+:: Start time service and sync now
+net start w32time
+w32tm /config /update
+w32tm /resync
+:: ----------------------------------------------------------
+
+
+pause
+exit /b 0
