@@ -1,10 +1,14 @@
-# ----------------------------------------------------------
-# ---------Change NTP (time) server to pool.ntp.org---------
-# ----------------------------------------------------------
+# -------------------------------------------------------------------------------
+# ---------Change NTP (time) server to pool.ntp.org + Changing Time zone---------
+# -------------------------------------------------------------------------------
 
 Write-Host "Change NTP (time) server to pool.ntp.org" -ForegroundColor Cyan
 
+# Set NTP servers
 $NTPServers = "0.ca.pool.ntp.org 1.ca.pool.ntp.org 2.ca.pool.ntp.org 3.ca.pool.ntp.org"
+
+# Change system time zone to Eastern Standard Time (UTC -5:00)
+Set-TimeZone -Id "Eastern Standard Time"
 
 # Configure time source
 w32tm /config /syncfromflags:manual /manualpeerlist:$NTPServers
