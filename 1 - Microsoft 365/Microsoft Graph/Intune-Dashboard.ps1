@@ -102,7 +102,7 @@ $UnassignedDevices = $ManagedDevices | Where-Object {$_.UserPrincipalName -eq $n
 
 # Find devices with less than 100 GB free space
 $MinimumFreeSpace = 100
-$LowStorageDevices = $ManagedDevices | Where-Object {($_.FreeStorageSpaceInBytes / 1GB) -lt $MinimumFreeSpace} | Select-Object DeviceName,  UserPrincipalName, @{Name="FreeSpaceGB";Expression={[math]::Round($_.FreeStorageSpaceInBytes / 1GB, 2)}}
+$LowStorageDevices = $ManagedDevices | Where-Object {($_.FreeStorageSpaceInBytes / 1GB) -lt $MinimumFreeSpace} 
 
 # ----------------------------------------------------------------------------------------------------------
 
@@ -286,7 +286,7 @@ New-HTML -TitleText "Intune Dashboard" -Online -FilePath "$OutputFolder\Intune-D
 
     # Devices with low storage
     New-HTMLSection -HeaderText "Devices with low storage"  -HeaderTextSize 14  -HeaderBackGroundColor "#708090" -CanCollapse {
-        New-HTMLTable -DataTable ($LowStorageDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime | Sort-Object -Descending ComplianceState) -Filtering -PagingLength 50
+        New-HTMLTable -DataTable ($LowStorageDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime, @{Name="FreeSpaceGB";Expression={[math]::Round($_.FreeStorageSpaceInBytes / 1GB, 2)}} | Sort-Object -Descending ComplianceState) -Filtering -PagingLength 50
     }
 
 } -ShowHTML
