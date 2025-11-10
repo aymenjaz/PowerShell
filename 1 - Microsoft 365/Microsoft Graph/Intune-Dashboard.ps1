@@ -256,32 +256,32 @@ New-HTML -TitleText "Intune Dashboard" -Online -FilePath "$OutputFolder\Intune-D
     # --------------------------------- DataTable Section ---------------------------------------------------------------------------------------    
     # Antivirus disabled Devices
     New-HTMLSection -HeaderText "Antivirus disabled"  -HeaderTextSize 14  -HeaderBackGroundColor "#708090" -CanCollapse {
-        New-HTMLTable -DataTable ($UnprotectedDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime | Sort-Object -Descending ComplianceState) -Filtering -PagingLength 50
+        New-HTMLTable -DataTable ($UnprotectedDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime ) -Filtering -PagingLength 50
     }
 
     # Noncompliant Devices
     New-HTMLSection -HeaderText "Noncompliant Devices"  -HeaderTextSize 14  -HeaderBackGroundColor "#708090" -CanCollapse {
-        New-HTMLTable -DataTable ($NoncompliantDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime | Sort-Object -Descending ComplianceState) -Filtering -PagingLength 50
+        New-HTMLTable -DataTable ($NoncompliantDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime ) -Filtering -PagingLength 50
     }
     
     # BitLocker disabled Devices
     New-HTMLSection -HeaderText "BitLocker disabled"  -HeaderTextSize 14  -HeaderBackGroundColor "#708090" -CanCollapse {
-        New-HTMLTable -DataTable ($UnecryptedDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime | Sort-Object -Descending ComplianceState) -Filtering -PagingLength 50
+        New-HTMLTable -DataTable ($UnecryptedDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime ) -Filtering -PagingLength 50
     }
 
     # Azure Unregistred Devices
     New-HTMLSection -HeaderText "Azure Unregistred Devices"  -HeaderTextSize 14  -HeaderBackGroundColor "#708090" -CanCollapse {
-        New-HTMLTable -DataTable ($AzureUnregistredDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime | Sort-Object -Descending ComplianceState ) -Filtering -PagingLength 50
+        New-HTMLTable -DataTable ($AzureUnregistredDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime ) -Filtering -PagingLength 50
     }
 
     # Personal Devices
     New-HTMLSection -HeaderText "Personal Devices"  -HeaderTextSize 14  -HeaderBackGroundColor "#708090" -CanCollapse {
-        New-HTMLTable -DataTable ($PersonalDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime | Sort-Object -Descending ComplianceState ) -Filtering -PagingLength 50
+        New-HTMLTable -DataTable ($PersonalDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime ) -Filtering -PagingLength 50
     }
 
     # Inactive Devices
     New-HTMLSection -HeaderText "Inactive Devices"  -HeaderTextSize 14  -HeaderBackGroundColor "#708090" -CanCollapse {
-        New-HTMLTable -DataTable ($InactiveDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime | Sort-Object -Descending ComplianceState) -Filtering -PagingLength 50
+        New-HTMLTable -DataTable ($InactiveDevices | Select-Object DeviceName , UserPrincipalName , OperatingSystem, Manufacturer, Model, OSVersion, ComplianceState, IsEncrypted, LastSyncDateTime, EnrolledDateTime ) -Filtering -PagingLength 50
     }
 
     # Devices with low storage
