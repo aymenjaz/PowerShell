@@ -145,7 +145,7 @@ $PersonalDevices = $ManagedDevices | Where-Object ManagedDeviceOwnerType  -EQ 'p
 
 New-HTML -TitleText "Intune Dashboard" -Online -FilePath "$OutputFolder\Intune-Dashboard.html" {
     
-    # -------------------------------- Devices Section ----------------------------------------------------------------------------------------
+    # -------------------------------- Devices Overview ----------------------------------------------------------------------------------------
     
     New-HTMLSection -HeaderText "Devices Overview" -HeaderTextSize 14 -HeaderBackGroundColor "#708090" -CanCollapse {
         
@@ -181,7 +181,7 @@ New-HTML -TitleText "Intune Dashboard" -Online -FilePath "$OutputFolder\Intune-D
         New-HTMLInfoCard -Title "Devices with low storage (Less than 100 GB)" -Number $LowStorageDevices.Count -Icon "💽" -IconColor "#ffc107"
         
     }
-    # --------------------------------- Graphic Section 1 ---------------------------------------------------------------------------------------
+    # --------------------------------- Security & Compliance ---------------------------------------------------------------------------------------
     New-HTMLSection -Height 350 -HeaderText "Security & Compliance"  -HeaderTextSize 14  -HeaderBackGroundColor "#708090" -CanCollapse  {
         
         # Defender Status
@@ -220,7 +220,7 @@ New-HTML -TitleText "Intune Dashboard" -Online -FilePath "$OutputFolder\Intune-D
         
     }
 
-    # --------------------------------- Graphic Section 2 ---------------------------------------------------------------------------------------
+    # --------------------------------- System & Hardware Insights ---------------------------------------------------------------------------------------
     New-HTMLSection -Height 350 -HeaderText "System & Hardware Insights" -HeaderTextSize 14  -HeaderBackGroundColor "#708090" -CanCollapse  {
 
         # PC Manufactor
