@@ -4,6 +4,20 @@ $TenantId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 $ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 $ClientSecret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
+# ----------------------------------------- Install Required Modules -------------------------------------------------
+if(!(Get-Module -Name PSWriteHTML -ListAvailable))
+{
+    Install-Module -Name PSWriteHTML -Force -AllowClobber
+    #Update-Module -Name PSWriteHTML -Force
+}
+Import-Module PSWriteHTML
+
+if(!(Get-Module -Name Microsoft.Graph -ListAvailable))
+{
+    Install-Module -Name Microsoft.Graph -Force -AllowClobber
+}
+#Import-Module Microsoft.Graph
+
 # -------------------------------------------------- Graph Connection Section -----------------------------------------
 $Scope = "https://graph.microsoft.com/.default"
 $AuthUrl =
@@ -22,20 +36,6 @@ $SecureToken = ConvertTo-SecureString -String $AccessToken -AsPlainText -Force
 
 # Use the token for authentication
 Connect-MgGraph -AccessToken $SecureToken
-
-# ----------------------------------------- Install Required Modules -------------------------------------------------
-if(!(Get-Module -Name PSWriteHTML -ListAvailable))
-{
-    Install-Module -Name PSWriteHTML -Force -AllowClobber
-    #Update-Module -Name PSWriteHTML -Force
-}
-Import-Module PSWriteHTML
-
-if(!(Get-Module -Name Microsoft.Graph -ListAvailable))
-{
-    Install-Module -Name Microsoft.Graph -Force -AllowClobber
-}
-#Import-Module Microsoft.Graph
 
 # --------------------------------- Create Output Folder : Temp --------------------------------------------
 $OutputFolder = "C:\temp"
