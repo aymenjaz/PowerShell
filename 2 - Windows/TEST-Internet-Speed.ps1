@@ -24,9 +24,9 @@ $Speedtest = $Speedtest | ConvertFrom-Json
 
 # Create New Object SpeedObject
 [PSCustomObject]$SpeedObject =[ordered] @{
-    downloadspeed = [math]::Round($Speedtest.download.bandwidth / 1000000 * 8, 2)
-    uploadspeed   = [math]::Round($Speedtest.upload.bandwidth / 1000000 * 8, 2)
-    packetloss    = [math]::Round($Speedtest.packetLoss)
+    downloadspeed = [String]([math]::Round($Speedtest.download.bandwidth / 1000000 * 8, 2)) + " MB"
+    uploadspeed   = [String]([math]::Round($Speedtest.upload.bandwidth / 1000000 * 8, 2)) + " MB"
+    packetloss    = [String]([math]::Round($Speedtest.packetLoss)) + " Packet"
     Latency       = [math]::Round($Speedtest.ping.latency)
     isp           = $Speedtest.isp
     ExternalIP    = $Speedtest.interface.externalIp
