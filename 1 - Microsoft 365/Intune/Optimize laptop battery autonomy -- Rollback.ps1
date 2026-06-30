@@ -32,12 +32,6 @@ try {
     # --- Commit the changes to the active scheme ---
     powercfg /setactive SCHEME_CURRENT
 
-    # Re-enable background UWP apps (remove the override; default = enabled).
-    $bgPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications"
-    if (Get-ItemProperty -Path $bgPath -Name "GlobalUserDisabled" -ErrorAction SilentlyContinue) {
-        Remove-ItemProperty -Path $bgPath -Name "GlobalUserDisabled" -ErrorAction SilentlyContinue
-    }
-
     Write-Output "Battery optimization rolled back: defaults restored (DC only)."
     exit 0
 }
