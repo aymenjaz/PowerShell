@@ -1,0 +1,67 @@
+
+# Enable Windows Hello PIN + Fingerprint
+# Run as Administrator
+
+try {
+    Write-Host "Enabling Windows Hello PIN and Fingerprint..." -ForegroundColor Cyan
+
+    # --- Enable Biometrics ---
+    $Path = "HKLM:\SOFTWARE\Policies\Microsoft\Biometrics"
+    if (-not (Test-Path $Path)) {
+        New-Item -Path $Path -Force | Out-Null
+        New-ItemProperty -Path $Path -Name "Enabled" -Value 1 -Type DWord -Force
+    }
+    else{
+        Set-ItemProperty -Path $Path -Name "Enabled" -Value 1 -Type DWord -Force
+    }
+    Write-Host "Biometrics Enabled ........................." -ForegroundColor Green
+
+    # Allow fingerprint sign-in
+    $Path1 = "HKLM:\SOFTWARE\Policies\Microsoft\Biometrics\FacialFeatures"
+    if (-not (Test-Path $Path1)) {
+        New-Item -Path $Path1 -Force | Out-Null
+        New-ItemProperty -Path $Path1 -Name "Enabled" -Value 1 -Type DWord -Force
+    }
+    else{
+        Set-ItemProperty -Path $Path1 -Name "Enabled" -Value 1 -Type DWord -Force
+    }
+
+    $Path2 = "HKLM:\SOFTWARE\Policies\Microsoft\Biometrics\Fingerprint"
+    if (-not (Test-Path $Path2)) {
+        New-Item -Path $Path2 -Force | Out-Null
+        New-ItemProperty -Path $Path2 -Name "Enabled" -Value 1 -Type DWord -Force
+    }
+    else{
+        Set-ItemProperty -Path $Path2 -Name "Enabled" -Value 1 -Type DWord -Force
+    }
+    Write-Host "Fingerprint sign-in Enabled ................" -ForegroundColor Green
+
+    # --- Enable Windows Hello for Business (PIN) ---
+    $Path3 = "HKLM:\SOFTWARE\Policies\Microsoft\PassportForWork"
+    if (-not (Test-Path $Path3)) {
+        New-Item -Path $Path3 -Force | Out-Null
+        New-ItemProperty -Path $Path3 -Name "Enabled" -Value 1 -Type DWord -Force
+    }
+    else{
+        Set-ItemProperty -Path $Path3 -Name "Enabled" -Value 1 -Type DWord -Force
+    }
+    Write-Host "Windows NIP Enabled........................." -ForegroundColor Green
+
+    # --- Ensure Windows Biometric Service is running ---
+    $service = Get-Service -Name "WbioSrvc" -ErrorAction SilentlyContinue
+    if ($null -eq $service) {
+        Write-Warning "Windows Biometric Service not found. Your system may not support biometrics."
+    } else {
+        if ($service.Status -ne 'Running') {
+            Set-Service -Name "WbioSrvc" -StartupType Automatic
+            Start-Service -Name "WbioSrvc"
+            Write-Host "Windows Biometric Service started." -ForegroundColor Green
+        } else {
+            Write-Host "Windows Biometric Service already running." -ForegroundColor Green
+        }
+    }
+
+}
+catch {
+    Write-Error "Error enabling Windows Hello: $_"
+}
