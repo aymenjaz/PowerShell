@@ -1,0 +1,84 @@
+<#
+.SYNOPSIS
+    Configures cross-tenant calendar availability sharing in Microsoft Entra ID (Azure AD).
+
+.DESCRIPTION
+    This script automates the setup of inbound cross-tenant access between two Microsoft 365 / Entra ID 
+    organizations. It enables Exchange calendar availability access (Free/Busy, Subject, and Location details) 
+    for specified users or security groups.
+
+    Key Features:
+    1. Connects to Microsoft Graph with the necessary scopes.
+    2. Checks for an existing cross-tenant partner policy and updates or creates it as needed.
+    3. Configures cross-tenant M365 collaboration capabilities for calendar sharing.
+
+.PARAMETER partnerId
+    The Tenant ID of the partner organization to establish cross-tenant access with.
+
+.PARAMETER capability
+    The level of calendar detail to expose:
+    - "crossTenantCalendarAvailabilityBasic"          : Free/Busy time information only.
+    - "crossTenantCalendarAvailabilityLimitedDetails" : Free/Busy time, Subject, and Location details.
+
+.PREREQUISITES
+    - PowerShell Module: Microsoft.Graph (Microsoft.Graph.Identity.SignIns)
+    - Required Entra ID Roles: Security Administrator or Global Administrator
+    - Required Graph Scopes: Policy.Read.All, Policy.ReadWrite.CrossTenantAccess, Policy.ReadWrite.CrossTenantCapability
+
+.EXAMPLE
+    Replace $partnerId with your target partner's Tenant ID and execute the script in a PowerShell session.
+
+.NOTES
+    Author      : Your Name / GitHub Username
+    License     : MIT (or your choice of license)
+#>
+
+
+Connect-MgGraph -Scopes "Policy.Read.All","Policy.ReadWrite.CrossTenantAccess","Policy.ReadWrite.CrossTenantCapability" -ContextScope Process
+
+# Dans Domaine1 : ID de Domaine2, et inversement
+$partnerId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"   
+
+# crossTenantCalendarAvailabilityBasic : Allows access to Free/Busy with Time information only.
+# crossTenantCalendarAvailabilityLimitedDetails  : Allows access to Free/Busy with Time, Subject, and Location information. 
+$capability = "crossTenantCalendarAvailabilityLimitedDetails"      
+
+
+$trust = @{
+  m365CollaborationInbound = @{
+    users = @{
+      accessType = "allowed"
+      targets    = @(@{ target = "AllUsers"; targetType = "user" })
+    }
+  }
+}
+
+# Entre organisations sÅ“urs, une config partenaire existe souvent dÃ©jÃ  (B2B, MTO, sync inter-tenant)
+$existing = Get-MgPolicyCrossTenantAccessPolicyPartner -CrossTenantAccessPolicyConfigurationPartnerTenantId $partnerId -ErrorAction SilentlyContinue
+
+if ($existing) {
+  Update-MgPolicyCrossTenantAccessPolicyPartner -CrossTenantAccessPolicyConfigurationPartnerTenantId $partnerId -BodyParameter $trust
+} else {
+  $trust.tenantId = $partnerId
+  New-MgPolicyCrossTenantAccessPolicyPartner -BodyParameter $trust
+}
+
+# -------------------------------------------------------------------------------------------
+
+# Tous les utilisateurs :
+$scope = @{ resourceId = "All"; resourceType = "user" }
+
+# $scope = @{ resourceId = "<ObjectId_groupe_securite>"; resourceType = "group" }
+
+$body = @{
+  "@odata.type" = "#microsoft.graph.$capability"
+  inboundAccess = @{
+    isAllowed      = $true
+    resourceScopes = @{
+      included = @($scope)
+      excluded = @(@{ })
+    }
+  }
+}
+
+New-MgPolicyCrossTenantAccessPolicyPartnerM365Capability -CrossTenantAccessPolicyConfigurationPartnerTenantId $partnerId -BodyParameter $body
