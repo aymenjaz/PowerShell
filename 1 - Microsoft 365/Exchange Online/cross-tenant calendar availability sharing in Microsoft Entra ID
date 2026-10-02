@@ -29,8 +29,8 @@
     Replace $partnerId with your target partner's Tenant ID and execute the script in a PowerShell session.
 
 .NOTES
-    Author      : Your Name / GitHub Username
-    License     : MIT (or your choice of license)
+    Author      : Aymen EL JAZIRI
+    License     : MIT 
 #>
 
 
