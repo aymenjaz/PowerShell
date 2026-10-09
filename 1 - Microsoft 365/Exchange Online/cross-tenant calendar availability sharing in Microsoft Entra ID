@@ -41,7 +41,7 @@ $partnerId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 # crossTenantCalendarAvailabilityBasic : Allows access to Free/Busy with Time information only.
 # crossTenantCalendarAvailabilityLimitedDetails  : Allows access to Free/Busy with Time, Subject, and Location information. 
-$capability = "crossTenantCalendarAvailabilityLimitedDetails"      
+$capability = "crossTenantCalendarAvailabilityBasic"      
 
 
 $trust = @{
