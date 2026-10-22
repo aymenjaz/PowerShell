@@ -1,0 +1,25 @@
+# Function to enable registry keys
+function Enable-RegistryKey {
+   param (
+       [string]$Path,
+       [string]$Name,
+       [string]$ValueType,
+       [int]$Value
+   )
+   if (-not (Test-Path $Path)) {
+       New-Item -Path $Path -Force | Out-Null
+   }
+   Set-ItemProperty -Path $Path -Name $Name -Value $Value -Type $ValueType -Force
+   Write-Output "Set registry key $Path\$Name to $Value"
+}
+# Enable necessary registry keys
+Enable-RegistryKey -Path "HKLM:\SOFTWARE\Policies\Microsoft\Biometrics" -Name "Enabled" -ValueType "DWORD" -Value 1
+Enable-RegistryKey -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowDomainPINLogon" -ValueType "DWORD" -Value 1
+Enable-RegistryKey -Path "HKLM:\SOFTWARE\Policies\Microsoft\PassportForWork" -Name "Enabled" -ValueType "DWORD" -Value 1
+
+# Start required services
+Set-Service -Name "WbioSrvc" -StartupType Automatic
+Start-Service -Name "WbioSrvc"
+Set-Service -Name "VaultSvc" -StartupType Automatic
+Start-Service -Name "VaultSvc"
+Write-Output "Windows Hello and Biometrics settings have been enabled. Please restart the machine for changes to take effect."
