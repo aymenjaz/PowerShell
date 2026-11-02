@@ -1,0 +1,15 @@
+
+#Requires -RunAsAdministrator
+$User = "admin2"
+$Pwd  = ConvertTo-SecureString "ANY-PAASWORD-HERE" -AsPlainText -Force
+
+if (Get-LocalUser -Name $User -ErrorAction SilentlyContinue) 
+{
+    Set-LocalUser -Name $User -Password $Pwd -PasswordNeverExpires $true
+} 
+else 
+{
+    New-LocalUser -Name $User -Password $Pwd -PasswordNeverExpires -AccountNeverExpires -Description "Compte admin local"
+}
+# SID S-1-5-32-544 = groupe Administrateurs, peu importe la langue de l'OS
+Add-LocalGroupMember -SID "S-1-5-32-544" -Member $User -ErrorAction SilentlyContinue
