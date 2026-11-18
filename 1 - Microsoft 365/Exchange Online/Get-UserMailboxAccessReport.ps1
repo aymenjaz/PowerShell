@@ -11,7 +11,7 @@
     UPN or primary SMTP address of the identity to check.
 
 .EXAMPLE
-    .\Get-MailboxDelegationByUser.ps1 -User x@domain.com
+    .\Get-UserMailboxAccessReport.ps1 -User x@domain.com
 
 .NOTES
     Requires: ExchangeOnlineManagement module, Exchange Recipient Administrator role.
