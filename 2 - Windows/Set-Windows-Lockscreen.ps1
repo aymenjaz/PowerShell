@@ -10,7 +10,7 @@ if((Test-Path $DownloadDir) -eq $false)
 }
 
 # ----------------------------------------------------- This is the HTTPS link for the Lockscreen file URL
-$Lockscreen = "_HTTPS_LINK_"
+$Lockscreen = "<Shared SharePoint Link or Public link for background image>"
 
 $Download = $DownloadDir + "Lockscreen-01.jpg"
 
